@@ -7,10 +7,20 @@ The simulator models PV generation, wind turbines, batteries, DC/DC converters, 
 and grid-interconnection behavior using simplified equivalent-circuit models.
 
 This repository provides:
-- Residential microgrid models (`Residential_grid1.slx`, `Residential_grid2.slx`)
+- Residential microgrid models (`Residential_grid5.slx`, `Residential_grid7.slx`)
 - Device models (PV, wind turbine, LiFePO₄ battery, DC/DC converter, household load, grid-exchange unit)
 - Weather-data processing scripts (Python + MATLAB)
-- A complete 20-page user manual (PDF)
+- User manuals (English & Japanese)
+
+---
+
+## Documentation
+
+- **DC Grid Simulator User Manual (English)**  
+  `docs/DC_Grid_Simulator_User_Manual.pdf`
+
+- **DC Grid Simulator User Manual (Japanese)**  
+  `docs/DC_Grid_Simulator_User_Manual_Japanese.pdf`
 
 ---
 
@@ -21,10 +31,12 @@ This repository provides:
   - SAPM temperature model  
   - MPPT-like maximum power output  
   - Over-voltage output suppression
+  - Over-charging output suppression
 
 - **Wind turbine model**  
   - Cut-in / rated / cut-out wind-speed characteristics  
   - Output-limiting function based on bus voltage
+  - Over-charging output suppression
 
 - **LiFePO₄ battery model**  
   - Lookup-table voltage characteristics  
@@ -51,16 +63,17 @@ This repository provides:
 
 ## Microgrid Models Included
 
-### `Residential_grid1.slx`
+### `Residential_grid5.slx`
 - PV + battery at each house  
 - Wind turbines at two bus locations  
-- Grid connection at one end  
+- Grid connection at one point  
 - Voltage-based grid power exchange  
 
-### `Residential_grid2.slx`
+### `Residential_grid7.slx`
 - Battery-driven DC/DC converters  
-- Grid connection at both ends  
+- Grid connection at one point  
 - SOC-based grid power exchange  
+- PV/wind generation control based on nearest battery SoC
 
 ---
 
@@ -69,11 +82,13 @@ This repository provides:
 Before running the simulation, import the following into MATLAB:
 
 - `Solar_Sendai_2023.mat` — POA & temperature-correction data (1-second resolution)  
-- `Wind_Speed.mat` — hourly wind-speed data  
-- `House1(365).mat`–`House4(365).mat` — household load profiles (1-year, 365 days)
-- `EV_Charge(Everyday_2AM~4AM_10kWh).mat` — daily EV charging load (2:00–4:00 AM daily)
+- `Wind_Speed_Sendai_2023.mat` — hourly wind-speed data  
+- `House1.mat`–`House5.mat` — household load profiles (1-year, 365 days)  
+- `EV_Charge.mat` — daily EV charging load (2:00–4:00 AM)
 
 Scripts for generating these files are provided in the `appendix/` folder.
+
+---
 
 ## Data Files (Zenodo)
 
@@ -82,52 +97,20 @@ Large data files required for running the DC Microgrid Simulator are hosted on Z
 **DOI: https://doi.org/10.5281/zenodo.21720183**
 
 This dataset includes:
-- Solar_Sendai_2023.mat (1.7 GB)
-- House1(365).mat – House4(365).mat (200 MB each)
-- Wind_Speed.mat
-- EV_Charge(Everyday_2AM~4AM_10kWh).mat
+- Solar_Sendai_2023.mat  
+- Wind_Speed_Sendai_2023.mat  
+- House1.mat – House5.mat  
+- EV_Charge.mat  
 
-All files are provided in MATLAB .mat format and are referenced by the Simulink model in this repository.
+All files are provided in MATLAB .mat format and are referenced by the Simulink models in this repository.
 
 ---
 
 ## Running the Simulation
 
-1. Open the desired Simulink model (`Residential_grid1.slx` or `Residential_grid2.slx`)
+1. Open the desired Simulink model (`Residential_grid5.slx` or `Residential_grid7.slx`)
 2. Import all required `.mat` files into the MATLAB workspace
 3. Set simulation end time (e.g., one year = `365*24*3600`)
 4. Run the simulation  
 5. Results (bus voltage, PV/wind output, grid exchange, battery SOC, cumulative energy)  
    will appear in Scope and Display blocks
-
----
-
-## Directory Structure (recommended)
-
-dc-microgrid-simulator/
-│
-├─ README.md
-├─ LICENSE
-├─ docs/
-│   └─ DC_Microgrid_Manual.pdf
-│
-├─ models/
-│   ├─ Residential_grid1.slx
-│   └─ Residential_grid2.slx
-│
-├─ data/
-│   ├─ Solar_Sendai_2023.mat
-│   ├─ Wind_Speed.mat
-│   ├─ House1(365).mat
-│   ├─ House2(365).mat
-│   ├─ House3(365).mat
-│   ├─ House4(365).mat
-│   └─ EV_Charge(Everyday_2AM~4AM_10kWh).mat
-│
-├─ scripts/
-│   ├─ python/
-│   │   └─ GHI_to_POA.py
-│   └─ matlab/
-│       ├─ POA_SAPM_to_1sec.m
-│       └─ generate_load_profiles.m
-
