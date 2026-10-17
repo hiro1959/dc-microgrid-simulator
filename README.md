@@ -1,6 +1,11 @@
 # DC Microgrid Simulator (MATLAB/Simulink)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21720183.svg)](https://doi.org/10.5281/zenodo.21720183)
 
+## Related Publication
+Yamada, H.; Liu, K. *Autonomous Distributed Control of Residential Microgrids:
+A Simulation-Based Comparative Study.* Electronics 2026, 15(20), 4786.  
+https://doi.org/10.3390/electronics15204786
+
 A MATLAB/Simulink-based simulator for analyzing and designing DC microgrids in residential areas.  
 The simulator models PV generation, wind turbines, batteries, DC/DC converters, household loads, and grid-interconnection behavior using simplified equivalent-circuit models.
 
