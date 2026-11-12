@@ -115,7 +115,7 @@ Major improvements:
 
 ### Japanese
 
-`docs/DCグリッド・シミュレータ使用マニュアルVer.3.0.pdf`
+`docs/DC_Grid_Simulator_User_Manual_Japanese_Ver3.0.pdf`
 
 ---
 
