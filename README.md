@@ -1,6 +1,6 @@
 # DC Microgrid Simulator (MATLAB/Simulink)
 
-https://zenodo.org/badge/DOI/10.5281/zenodo.21720183.svg](https://doi.org/10.5281/zenodo.21720183)
+DOI: https://doi.org/10.5281/zenodo.21720183
 
 **Current Version:** 3.0 (12 Nov. 2026)
 
