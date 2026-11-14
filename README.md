@@ -2,7 +2,7 @@
 
 DOI: https://doi.org/10.5281/zenodo.21720183
 
-**Current Version:** 3.0 (12 Nov. 2026)
+**Current Version:** 3.1 (14 Nov. 2026)
 
 ---
 
@@ -39,7 +39,7 @@ using simplified equivalent-circuit models suitable for long-term energy-flow si
 
 ### Residential Microgrid Example Models
 
-#### `Residential_grid_EL1R.slx`
+#### `Residential_grid_EL1R2.slx`
 
 Autonomous distributed cooperative control model.
 
@@ -52,7 +52,7 @@ Features:
 - SoC-based distributed coordination
 - PV/wind output control based on neighboring battery SoC
 
-#### `Residential_grid_EL2R.slx`
+#### `Residential_grid_EL2R2.slx`
 
 Autonomous distributed control model.
 
@@ -86,23 +86,22 @@ Features:
 
 ---
 
-## Latest Update (Version 3.0)
+## Latest Update (Version 3.1)
 
-Version 3.0 introduces a new data-handling scheme that directly uses the original hourly weather datasets during simulation.
+Version 3.1 improves the interpolation scheme used for converting hourly weather and load data into one-second simulation inputs.
 
 Major improvements:
 
-- Original hourly weather data are used directly.
-- Cubic-spline interpolation is performed dynamically during simulation.
-- Dataset size has been reduced from hundreds of megabytes to only several tens of kilobytes.
-- Significantly reduced memory consumption.
-- Added weather datasets for:
-  - Sapporo
-  - Sendai
-  - Tokyo
-  - Osaka
-  - Fukuoka
-  - Naha
+- Replaced cubic-spline interpolation with Akima-spline interpolation.
+- Eliminated overshoot and unrealistic negative values that could occur with cubic-spline interpolation.
+- Improved interpolation accuracy for:
+  - PV generation profiles
+  - Wind-power generation profiles
+  - Residential load profiles
+- Added Appendix F describing interpolation methods and comparison results.
+- Updated example models:
+  - Residential_grid_EL1R2.slx
+  - Residential_grid_EL2R2.slx
 - Updated English and Japanese user manuals.
 
 ---
@@ -111,11 +110,11 @@ Major improvements:
 
 ### English
 
-`docs/DC_Grid_Simulator_User_Manual_Ver3.0.pdf`
+`docs/DC_Grid_Simulator_User_Manual_Ver3.1.pdf`
 
 ### Japanese
 
-`docs/DC_Grid_Simulator_User_Manual_Japanese_Ver3.0.pdf`
+`docs/DC_Grid_Simulator_User_Manual_Japanese_Ver3.1.pdf`
 
 ---
 
@@ -128,14 +127,14 @@ Major improvements:
 - MPPT-based maximum-power operation
 - Terminal-voltage-based output curtailment
 - SoC-based output curtailment
-- Dynamic interpolation of hourly weather data (Ver.3.0)
+- Dynamic Akima-spline interpolation of hourly weather data (Ver.3.1)
 
 ### Wind Turbine Model
 
 - Cut-in / rated / cut-out wind-speed characteristics
 - Terminal-voltage-based output curtailment
 - SoC-based output curtailment
-- Dynamic interpolation of hourly wind-speed data (Ver.3.0)
+- Dynamic Akima-spline interpolation of hourly weather data (Ver.3.1)
 
 ### LiFePO₄ Battery Model
 
@@ -156,7 +155,7 @@ Major improvements:
 - Statistical monthly consumption model
 - Random daily variation
 - Typical hourly load pattern
-- Dynamic interpolation of hourly load data
+- Dynamic Akima-spline interpolation of hourly load data (Ver.3.1)
 
 ### Grid-Interconnection Model
 
@@ -166,9 +165,9 @@ Major improvements:
 
 ---
 
-## Microgrid Models Included
+## Current Example Models (Recommended)
 
-### Residential_grid_EL1R.slx
+### Residential_grid_EL1R2.slx
 
 Autonomous distributed cooperative control.
 
@@ -177,7 +176,7 @@ Autonomous distributed cooperative control.
 - SoC-based wind-power control
 - SoC-based utility-grid power exchange
 
-### Residential_grid_EL2R.slx
+### Residential_grid_EL2R2.slx
 
 Autonomous distributed control.
 
@@ -188,6 +187,8 @@ Autonomous distributed control.
 
 ### Legacy Models
 
+- `Residential_grid_EL1R.slx` (Ver.3.0)
+- `Residential_grid_EL2R.slx` (Ver.3.0)
 - `Residential_grid8.slx` (Ver.2.2)
 - `Residential_grid9.slx` (Ver.2.2)
 
@@ -278,8 +279,8 @@ The Zenodo archive contains:
 ## Running the Simulation
 
 1. Open either:
-   - `Residential_grid_EL1R.slx`
-   - `Residential_grid_EL2R.slx`
+   - `Residential_grid_EL1R2.slx`
+   - `Residential_grid_EL2R2.slx`
 
 2. Import the required MAT files into the MATLAB workspace.
 
@@ -308,6 +309,21 @@ will be displayed through Simulink Scope and Display blocks.
 ---
 
 ## Version History
+
+### Version 3.1 (2026-11-14)
+
+Major changes:
+
+- Replaced cubic-spline interpolation with Akima-spline interpolation for hourly-to-second data conversion.
+- Improved PV, wind-power, and residential-load profile generation.
+- Eliminated overshoot and unrealistic negative values caused by cubic-spline interpolation.
+- Added Appendix F describing interpolation methods and comparison results.
+- Added new example models:
+  - Residential_grid_EL1R2.slx
+  - Residential_grid_EL2R2.slx
+- Updated English and Japanese user manuals:
+  - DC_Grid_Simulator_User_Manual_Ver3.1.pdf
+  - DC_Grid_Simulator_User_Manual_Japanese_Ver3.1.pdf
 
 ### Version 3.0 (2026-11-12)
 
